@@ -27,6 +27,23 @@ source of truth.
 
 Built and tested on Cinnamon 6.6 (Linux Mint 22.3).
 
+## Screenshots
+
+![The Tandem Dock at rest](screenshots/dock-rest.png)
+
+*Icons resting at half size on the smoky glass tray, with their faint
+reflections and running-window dots.*
+
+![Hover magnification](screenshots/dock-zoom.png)
+
+*Hovering an icon: it magnifies to full size with a Gaussian falloff to its
+neighbours, growing upward from the tray floor.*
+
+![Settings](screenshots/settings.png)
+
+*The dock's settings — opened from the small gear on the right of the
+dock.*
+
 ## Requirements
 
 - Cinnamon 6.4+ with the **grouped window list** applet on a panel (the
