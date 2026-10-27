@@ -1,0 +1,68 @@
+/* Tandem Dock styles */
+
+.tandem-dock-box {
+    background-color: rgba(24, 26, 30, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 3px 8px;
+    spacing: 4px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+.tandem-dock-icon-box {
+    padding: 1px;
+}
+
+.tandem-dock-icon {
+    padding: 0px;
+}
+
+.tandem-dock-running-dot {
+    background-color: #8bc8ff;
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    margin-top: 1px;
+}
+
+.tandem-preview-box {
+    background-color: rgba(28, 30, 34, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 10px;
+    padding: 6px;
+    spacing: 4px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.tandem-preview-row {
+    border-radius: 6px;
+    padding: 4px 6px;
+    spacing: 8px;
+    min-width: 220px;
+}
+
+.tandem-preview-row:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.tandem-preview-title {
+    color: #e6e6e6;
+}
+
+.tandem-preview-empty {
+    color: #aaaaaa;
+    padding: 4px 6px;
+}
+
+.tandem-preview-close {
+    background-color: transparent;
+    color: #aaaaaa;
+    border-radius: 4px;
+    padding: 0 4px;
+    width: 18px;
+}
+
+.tandem-preview-close:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}

@@ -1,0 +1,91 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": ["general", "behavior"],
+    "pages-content": {
+      "general": {
+        "type": "page",
+        "title": "General",
+        "sections": ["appearance", "source"]
+      },
+      "behavior": {
+        "type": "page",
+        "title": "Behavior",
+        "sections": ["zoom", "preview"]
+      }
+    },
+    "sections-content": {
+      "appearance": {
+        "type": "section",
+        "title": "Appearance",
+        "keys": ["icon-size", "show-running-dot"]
+      },
+      "source": {
+        "type": "section",
+        "title": "Pin source",
+        "keys": ["gwl-settings-file"]
+      },
+      "zoom": {
+        "type": "section",
+        "title": "Hover zoom",
+        "keys": ["zoom-factor", "zoom-time"]
+      },
+      "preview": {
+        "type": "section",
+        "title": "Window preview",
+        "keys": ["enable-preview", "preview-delay"]
+      }
+    }
+  },
+  "icon-size": {
+    "type": "spinbutton",
+    "default": 40,
+    "min": 16,
+    "max": 72,
+    "step": 1,
+    "units": "px",
+    "description": "Dock icon size"
+  },
+  "show-running-dot": {
+    "type": "switch",
+    "default": true,
+    "description": "Show a dot under icons with open windows"
+  },
+  "gwl-settings-file": {
+    "type": "entry",
+    "default": "auto",
+    "description": "Grouped window list settings file to mirror (e.g. 2.json). 'auto' picks the most recently modified one."
+  },
+  "zoom-factor": {
+    "type": "spinbutton",
+    "default": 1.25,
+    "min": 1.0,
+    "max": 2.0,
+    "step": 0.05,
+    "units": "x",
+    "description": "Hovered icon zoom factor"
+  },
+  "zoom-time": {
+    "type": "spinbutton",
+    "default": 0.15,
+    "min": 0.05,
+    "max": 0.6,
+    "step": 0.05,
+    "units": "s",
+    "description": "Zoom animation duration"
+  },
+  "enable-preview": {
+    "type": "switch",
+    "default": true,
+    "description": "Show a preview popup with open windows on hover"
+  },
+  "preview-delay": {
+    "type": "spinbutton",
+    "default": 350,
+    "min": 0,
+    "max": 2000,
+    "step": 50,
+    "units": "ms",
+    "description": "Hover delay before the preview popup appears"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "uuid": "tandem-dock@ciberjohn",
+  "name": "Tandem Dock",
+  "description": "A small centered dock that mirrors the pinned apps of your main panel's grouped window list in real time. Pin or unpin on the panel and the dock follows, with macOS-style hover zoom and a hover preview of each app's open windows.",
+  "version": "1.0.0",
+  "cinnamon-version": ["6.4", "6.6"],
+  "max-version": "6.6",
+  "min-version": "6.4",
+  "author": "ciberjohn"
+}
