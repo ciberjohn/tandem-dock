@@ -2,39 +2,35 @@
   "layout": {
     "type": "layout",
     "pages": ["general", "behavior"],
-    "pages-content": {
-      "general": {
-        "type": "page",
-        "title": "General",
-        "sections": ["appearance", "source"]
-      },
-      "behavior": {
-        "type": "page",
-        "title": "Behavior",
-        "sections": ["zoom", "preview"]
-      }
+    "general": {
+      "type": "page",
+      "title": "General",
+      "sections": ["appearance", "source"]
     },
-    "sections-content": {
-      "appearance": {
-        "type": "section",
-        "title": "Appearance",
-        "keys": ["icon-size", "rest-scale", "show-running-dot"]
-      },
-      "source": {
-        "type": "section",
-        "title": "Pin source",
-        "keys": ["gwl-settings-file"]
-      },
-      "zoom": {
-        "type": "section",
-        "title": "Hover zoom",
-        "keys": ["zoom-time"]
-      },
-      "preview": {
-        "type": "section",
-        "title": "Window preview",
-        "keys": ["enable-preview", "preview-delay"]
-      }
+    "behavior": {
+      "type": "page",
+      "title": "Behavior",
+      "sections": ["zoom", "preview"]
+    },
+    "appearance": {
+      "type": "section",
+      "title": "Appearance",
+      "keys": ["icon-size", "rest-scale", "show-running-dot"]
+    },
+    "source": {
+      "type": "section",
+      "title": "Pin source",
+      "keys": ["gwl-settings-file"]
+    },
+    "zoom": {
+      "type": "section",
+      "title": "Hover zoom",
+      "keys": ["zoom-time"]
+    },
+    "preview": {
+      "type": "section",
+      "title": "Window preview",
+      "keys": ["enable-preview", "preview-delay"]
     }
   },
   "icon-size": {
