@@ -55,6 +55,7 @@ class DockIcon {
         this.iconBin = new Cinnamon.Slicer({ style_class: 'tandem-dock-icon' });
         this.iconBin.set_pivot_point(0.5, 0.5);
         this.iconBin.set_child(this.app.create_icon_texture(this.dock.icon_size));
+        this.iconBin.set_scale(this.dock.rest_scale, this.dock.rest_scale);
         this.actor.add_child(this.iconBin);
 
         this.dot = new St.Bin({ style_class: 'tandem-dock-running-dot' });
@@ -239,9 +240,9 @@ class TandemDock extends Applet.Applet {
 
         this.settings = new AppletSettings(this, metadata.uuid, instanceId);
         this.settings.bind('icon-size', 'icon_size', () => this.rebuild(true));
+        this.settings.bind('rest-scale', 'rest_scale', () => this.updateHoverZoom(null));
         this.settings.bind('show-running-dot', 'show_running_dot', () => this.updateRunningStates());
         this.settings.bind('gwl-settings-file', 'gwl_settings_file', () => this.watchGwlFile());
-        this.settings.bind('zoom-factor', 'zoom_factor', () => this.updateHoverZoom(null));
         this.settings.bind('zoom-time', 'zoom_time', null);
         this.settings.bind('enable-preview', 'enable_preview', null);
         this.settings.bind('preview-delay', 'preview_delay', null);
@@ -257,6 +258,23 @@ class TandemDock extends Applet.Applet {
 
         this.box = new St.BoxLayout({ style_class: 'tandem-dock-box' });
         this.actor.add_child(this.box);
+
+        // Small always-visible settings button on the right of the dock.
+        this.settingsBtn = new St.Button({
+            style_class: 'tandem-dock-settings-btn',
+            reactive: true,
+            track_hover: true
+        });
+        this.settingsBtn.set_child(new St.Icon({
+            icon_name: 'preferences-system-symbolic',
+            icon_type: St.IconType.SYMBOLIC,
+            icon_size: 14
+        }));
+        this.signals.connect(this.settingsBtn, 'button-press-event', (a, e) => {
+            if (e.get_button() === 1) this.configureApplet();
+            return true;
+        });
+        this.actor.add_child(this.settingsBtn);
 
         // Live window tracking for the running dots. Muffin's MetaDisplay has
         // no window-added/removed signals; hook per-window 'unmanaged' as
@@ -406,11 +424,16 @@ class TandemDock extends Applet.Applet {
     // ---- hover zoom -------------------------------------------------------
 
     updateHoverZoom(hovered) {
+        const rest = Math.min(1.0, Math.max(0.1, this.rest_scale));
+        const amp = 1.0 - rest;
         const hoveredIndex = hovered ? this.icons.indexOf(hovered) : -1;
         this.icons.forEach((icon, i) => {
             const d = hovered ? Math.abs(i - hoveredIndex) : Infinity;
-            const amp = Math.max(0, this.zoom_factor - 1);
-            icon.zoomIcon(1 + amp * Math.exp(-(d * d) / (2 * ZOOM_SIGMA)));
+            // hovered icon reaches full size (1.0 = icon-size); neighbours
+            // fall off from full size back to the resting scale
+            icon.zoomIcon(hovered && i === hoveredIndex
+                ? 1.0
+                : rest + amp * Math.exp(-(d * d) / (2 * ZOOM_SIGMA)));
         });
     }
 
@@ -450,6 +473,15 @@ class TandemDock extends Applet.Applet {
 
     logError(msg) {
         global.logError('TandemDock: ' + msg);
+    }
+
+    on_applet_added_to_panel(userEnabled) {
+        // Make this dock's own panel fully transparent (scoped by class so
+        // other panels keep their theme look).
+        if (this.panel && this.panel.actor &&
+                !this.panel.actor.has_style_class_name('tandem-dock-panel')) {
+            this.panel.actor.add_style_class_name('tandem-dock-panel');
+        }
     }
 
     on_applet_removed_from_panel() {

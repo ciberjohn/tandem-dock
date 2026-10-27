@@ -18,7 +18,7 @@
       "appearance": {
         "type": "section",
         "title": "Appearance",
-        "keys": ["icon-size", "show-running-dot"]
+        "keys": ["icon-size", "rest-scale", "show-running-dot"]
       },
       "source": {
         "type": "section",
@@ -28,7 +28,7 @@
       "zoom": {
         "type": "section",
         "title": "Hover zoom",
-        "keys": ["zoom-factor", "zoom-time"]
+        "keys": ["zoom-time"]
       },
       "preview": {
         "type": "section",
@@ -44,7 +44,16 @@
     "max": 72,
     "step": 1,
     "units": "px",
-    "description": "Dock icon size"
+    "description": "Zoomed icon size (reached on hover)"
+  },
+  "rest-scale": {
+    "type": "spinbutton",
+    "default": 0.5,
+    "min": 0.1,
+    "max": 1.0,
+    "step": 0.05,
+    "units": "x",
+    "description": "Resting icon scale (icons sit at this fraction of the zoomed size)"
   },
   "show-running-dot": {
     "type": "switch",
@@ -55,15 +64,6 @@
     "type": "entry",
     "default": "auto",
     "description": "Grouped window list settings file to mirror (e.g. 2.json). 'auto' picks the most recently modified one."
-  },
-  "zoom-factor": {
-    "type": "spinbutton",
-    "default": 1.25,
-    "min": 1.0,
-    "max": 2.0,
-    "step": 0.05,
-    "units": "x",
-    "description": "Hovered icon zoom factor"
   },
   "zoom-time": {
     "type": "spinbutton",

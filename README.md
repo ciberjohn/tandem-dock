@@ -9,11 +9,17 @@ source of truth.
 
 - **Live mirroring** of the grouped-window-list pin list (file-monitor based,
   near-instant updates, no restarts)
-- **macOS-style hover zoom** — the hovered icon scales up with a Gaussian
+- **macOS-style magnification** — icons rest at a fraction of their size
+  (default half) and the hovered icon grows to full size with a Gaussian
   falloff to its neighbours (pure GPU transform, hit targets untouched)
+- **Fully transparent dock** — no pill, no panel background; the icons
+  float free (the host panel is made transparent by the applet itself,
+  scoped so other panels keep their theme look)
 - **Hover preview popup** — lists the app's open windows with their titles;
   click a row to focus a window, click `x` to close it
 - **Running indicator** — a small dot under icons whose app has open windows
+- **Settings button** — a small always-visible gear on the right of the
+  dock opens the applet's settings
 - **Click** to focus the most recent window or launch the app;
   **middle-click** for a new window; **right-click** opens the preview
 
@@ -45,11 +51,11 @@ it a modest height (45-50px works well with 40px icons).
 
 | Setting | Default | Description |
 |---|---|---|
-| Icon size | 40px | Dock icon size |
+| Icon size | 40px | Size the hovered icon magnifies to |
+| Rest scale | 0.5x | Fraction of the icon size used while resting |
 | Running dot | on | Dot under icons with open windows |
 | GWL settings file | auto | Which grouped-window-list instance to mirror; `auto` picks the most recently modified |
-| Zoom factor | 1.25x | Hovered icon scale |
-| Zoom time | 0.15s | Zoom animation duration |
+| Zoom time | 0.15s | Magnification animation duration |
 | Preview popup | on | Window list popup on hover |
 | Preview delay | 350ms | Hover delay before the popup appears |
 
