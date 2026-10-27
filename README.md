@@ -12,9 +12,10 @@ source of truth.
 - **macOS-style magnification** — icons rest at a fraction of their size
   (default half) and the hovered icon grows to full size with a Gaussian
   falloff to its neighbours (pure GPU transform, hit targets untouched)
-- **Fully transparent dock** — no pill, no panel background; the icons
-  float free (the host panel is made transparent by the applet itself,
-  scoped so other panels keep their theme look)
+- **Smoky-glass pill** — a dark translucent rounded background with a
+  bright top edge and a soft shadow floats behind the icons; the wallpaper
+  shows through the tint. The host panel stays fully transparent (made so
+  by the applet itself, scoped so other panels keep their theme look)
 - **Hover preview popup** — lists the app's open windows with their titles;
   click a row to focus a window, click `x` to close it
 - **Running indicator** — a small dot under icons whose app has open windows

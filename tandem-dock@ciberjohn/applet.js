@@ -249,15 +249,21 @@ class TandemDock extends Applet.Applet {
 
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
-        // Some themes paint .applet-box (the applet's base actor) with a
-        // solid background - an ugly rectangle around the transparent dock.
-        // An inline style beats any theme rule.
+        // Smoky-glass pill for the dock: dark translucent tint over the
+        // wallpaper, rounded corners, a bright top edge as the glass
+        // highlight and a soft drop shadow. Scoped to this applet's actor
+        // only (inline style beats any theme rule). Some themes would
+        // otherwise paint .applet-box a solid grey.
         this.actor.set_style(
-            'background-color: transparent;' +
+            'background-color: rgba(22, 24, 29, 0.55);' +
             'background-gradient-direction: vertical;' +
-            'background-gradient-start: transparent;' +
-            'background-gradient-end: transparent;' +
-            'border: none; border-image: none; box-shadow: none;'
+            'background-gradient-start: rgba(70, 74, 82, 0.38);' +
+            'background-gradient-end: rgba(14, 16, 20, 0.62);' +
+            'border: 1px solid rgba(255, 255, 255, 0.12);' +
+            'border-image: none;' +
+            'border-radius: 14px;' +
+            'box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.35);' +
+            'margin-top: 3px; margin-bottom: 3px;'
         );
 
         this.icons = [];

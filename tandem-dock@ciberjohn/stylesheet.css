@@ -1,13 +1,20 @@
 /* Tandem Dock styles */
 
 /* Belt and braces for the applet's base actor (applet-box): some themes
-   give it a solid background. The applet also sets an inline style. */
+   give it a solid background. The applet also sets an inline style with
+   the smoky-glass pill values. */
 .applet-box.tandem-dock-ciberjohn-applet,
 .applet-box.tandem-dock-ciberjohn-applet:hover,
 .applet-box.tandem-dock-ciberjohn-applet:focus {
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
+    background-color: rgba(22, 24, 29, 0.55);
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(70, 74, 82, 0.38);
+    background-gradient-end: rgba(14, 16, 20, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.35);
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 /* The dock itself is fully transparent - icons float free. */
