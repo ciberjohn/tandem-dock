@@ -30,6 +30,8 @@ const Tweener = imports.ui.tweener;
 
 const GWL_DIR = GLib.get_home_dir() + '/.config/cinnamon/spices/grouped-window-list@cinnamon.org';
 const ZOOM_SIGMA = 2.0; // falloff: factor = 1 + amp * exp(-d^2 / (2*sigma))
+const REFLECTION_SQUASH = 0.3;   // reflection height as a fraction of the icon
+const REFLECTION_PIVOT_Y = 0.3 / 1.3; // keeps the flipped band flush under the icon
 
 function appWindows(app) {
     if (!app) return [];
@@ -53,10 +55,23 @@ class DockIcon {
         });
 
         this.iconBin = new Cinnamon.Slicer({ style_class: 'tandem-dock-icon' });
-        this.iconBin.set_pivot_point(0.5, 0.5);
+        this.iconBin.set_pivot_point(0.5, 1.0); // grow upward from the tray floor
         this.iconBin.set_child(this.app.create_icon_texture(this.dock.icon_size));
         this.iconBin.set_scale(this.dock.rest_scale, this.dock.rest_scale);
         this.actor.add_child(this.iconBin);
+
+        // Aqua-dock reflection: a flipped, squashed copy of the icon sitting
+        // on the glass right under it. Rendered into the top REFLECTION band
+        // of the slicer via the pivot, the rest of the cell stays empty.
+        this.reflectionBin = null;
+        if (this.dock.show_reflection) {
+            this.reflectionBin = new Cinnamon.Slicer({ style_class: 'tandem-dock-reflection' });
+            this.reflectionBin.set_pivot_point(0.5, REFLECTION_PIVOT_Y);
+            this.reflectionBin.set_child(this.app.create_icon_texture(this.dock.icon_size));
+            this.reflectionBin.set_opacity(45);
+            this.reflectionBin.set_scale(this.dock.rest_scale, -REFLECTION_SQUASH);
+            this.actor.add_child(this.reflectionBin);
+        }
 
         this.dot = new St.Bin({ style_class: 'tandem-dock-running-dot' });
         this.actor.add_child(this.dot);
@@ -130,13 +145,22 @@ class DockIcon {
 
     zoomIcon(factor) {
         if (this.finalized) return;
-        if (this.iconBin.scale_x === factor) return;
+        if (this.iconBin.scale_x === factor && !this.reflectionBin) return;
         Tweener.addTween(this.iconBin, {
             scale_x: factor,
             scale_y: factor,
             time: this.dock.zoom_time,
             transition: 'easeOutQuad'
         });
+        if (this.reflectionBin) {
+            // The reflection tracks the icon's width but keeps a constant
+            // squash; the flip (negative scale_y) is fixed.
+            Tweener.addTween(this.reflectionBin, {
+                scale_x: factor,
+                time: this.dock.zoom_time,
+                transition: 'easeOutQuad'
+            });
+        }
     }
 
     destroy() {
@@ -241,6 +265,7 @@ class TandemDock extends Applet.Applet {
         this.settings = new AppletSettings(this, metadata.uuid, instanceId);
         this.settings.bind('icon-size', 'icon_size', () => this.rebuild(true));
         this.settings.bind('rest-scale', 'rest_scale', () => this.updateHoverZoom(null));
+        this.settings.bind('show-reflection', 'show_reflection', () => this.rebuild(true));
         this.settings.bind('show-running-dot', 'show_running_dot', () => this.updateRunningStates());
         this.settings.bind('gwl-settings-file', 'gwl_settings_file', () => this.watchGwlFile());
         this.settings.bind('zoom-time', 'zoom_time', null);
@@ -249,20 +274,18 @@ class TandemDock extends Applet.Applet {
 
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
-        // Smoky-glass pill for the dock: dark translucent tint over the
-        // wallpaper, rounded corners, a bright top edge as the glass
-        // highlight and a soft drop shadow. Scoped to this applet's actor
-        // only (inline style beats any theme rule). Some themes would
-        // otherwise paint .applet-box a solid grey.
+        // 3D glass tray: a bright sheen along the top fading into a deep
+        // smoky base, rounded corners, a lit rim and a drop shadow. Scoped
+        // to this applet's actor only (inline style beats any theme rule).
         this.actor.set_style(
             'background-color: rgba(22, 24, 29, 0.55);' +
             'background-gradient-direction: vertical;' +
-            'background-gradient-start: rgba(70, 74, 82, 0.38);' +
-            'background-gradient-end: rgba(14, 16, 20, 0.62);' +
-            'border: 1px solid rgba(255, 255, 255, 0.12);' +
+            'background-gradient-start: rgba(160, 168, 182, 0.30);' +
+            'background-gradient-end: rgba(8, 10, 14, 0.72);' +
+            'border: 1px solid rgba(255, 255, 255, 0.22);' +
             'border-image: none;' +
-            'border-radius: 14px;' +
-            'box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.35);' +
+            'border-radius: 16px;' +
+            'box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.50);' +
             'margin-top: 3px; margin-bottom: 3px;'
         );
 

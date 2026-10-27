@@ -12,10 +12,11 @@ source of truth.
 - **macOS-style magnification** — icons rest at a fraction of their size
   (default half) and the hovered icon grows to full size with a Gaussian
   falloff to its neighbours (pure GPU transform, hit targets untouched)
-- **Smoky-glass pill** — a dark translucent rounded background with a
-  bright top edge and a soft shadow floats behind the icons; the wallpaper
-  shows through the tint. The host panel stays fully transparent (made so
-  by the applet itself, scoped so other panels keep their theme look)
+- **3D glass tray** — icons stand on a deep smoky-glass shelf with a bright
+  top sheen, rounded corners and a drop shadow, each with a faint squashed
+  reflection of itself in the glass (Aqua-dock style, toggleable). The host
+  panel stays fully transparent (made so by the applet itself, scoped so
+  other panels keep their theme look)
 - **Hover preview popup** — lists the app's open windows with their titles;
   click a row to focus a window, click `x` to close it
 - **Running indicator** — a small dot under icons whose app has open windows
@@ -65,6 +66,7 @@ extension reads its settings at startup).
 |---|---|---|
 | Icon size | 40px | Size the hovered icon magnifies to |
 | Rest scale | 0.5x | Fraction of the icon size used while resting |
+| Reflection | on | Squashed icon reflection in the glass (Aqua-dock style) |
 | Running dot | on | Dot under icons with open windows |
 | GWL settings file | auto | Which grouped-window-list instance to mirror; `auto` picks the most recently modified |
 | Zoom time | 0.15s | Magnification animation duration |

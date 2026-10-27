@@ -8,13 +8,20 @@
 .applet-box.tandem-dock-ciberjohn-applet:focus {
     background-color: rgba(22, 24, 29, 0.55);
     background-gradient-direction: vertical;
-    background-gradient-start: rgba(70, 74, 82, 0.38);
-    background-gradient-end: rgba(14, 16, 20, 0.62);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 14px;
-    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.35);
+    background-gradient-start: rgba(160, 168, 182, 0.30);
+    background-gradient-end: rgba(8, 10, 14, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 16px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.50);
     margin-top: 3px;
     margin-bottom: 3px;
+}
+
+/* Reflection cell: only the top band holds pixels; the fixed height keeps
+   the dock layout compact. */
+.tandem-dock-reflection {
+    height: 12px;
+    padding: 0px;
 }
 
 /* The dock itself is fully transparent - icons float free. */
