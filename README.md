@@ -47,6 +47,17 @@ To keep the dock visually "floating", set the panel's auto-hide to
 *Auto-hide* (dock reveals when the pointer reaches the bottom edge) and give
 it a modest height (45-50px works well with 40px icons).
 
+### If you use the BlurCinnamon extension
+
+BlurCinnamon paints a blurred/dimmed band behind **every** panel, which
+shows up as a visible bar behind the transparent dock. In the extension's
+settings, enable *Override the generic effect settings for the Panels* and
+*Enable advanced options to apply unique settings for each panel*, then add
+a unique setting for **bottom** panels with *Override* checked, opacity 0
+and blur type *Transparent*. The dock's panel then stays fully invisible
+while other panels keep their blur. Apply with Cinnamon restarted (the
+extension reads its settings at startup).
+
 ## Settings
 
 | Setting | Default | Description |
