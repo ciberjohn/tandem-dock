@@ -1,5 +1,15 @@
 /* Tandem Dock styles */
 
+/* Belt and braces for the applet's base actor (applet-box): some themes
+   give it a solid background. The applet also sets an inline style. */
+.applet-box.tandem-dock-ciberjohn-applet,
+.applet-box.tandem-dock-ciberjohn-applet:hover,
+.applet-box.tandem-dock-ciberjohn-applet:focus {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
 /* The dock itself is fully transparent - icons float free. */
 .tandem-dock-box {
     background-color: transparent;
