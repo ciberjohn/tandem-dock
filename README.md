@@ -1,10 +1,10 @@
-# Tandem Dock for Cinnamon
+# Tandem Dock
 
-A small, centered dock for the Cinnamon desktop that **mirrors the pinned
-apps of your main panel's grouped window list in real time**.
+A small, centered dock for the Cinnamon and KDE Plasma desktops that
+**mirrors the pinned apps of your main bar's task manager in real time**.
 
-Pin an app on your panel — the dock gains it. Unpin it — the dock loses it.
-No dock preferences to maintain: the grouped window list stays the single
+Pin an app on your bar — the dock gains it. Unpin it — the dock loses it.
+No dock preferences to maintain: the task manager stays the single
 source of truth.
 
 - **Live mirroring** of the grouped-window-list pin list (file-monitor based,
@@ -32,9 +32,15 @@ Built and tested on Cinnamon 6.6 (Linux Mint 22.3).
 Tandem Dock is one product with two frontends sharing a behavior spec:
 
 - **Cinnamon** — this applet, stable, v1.3.0 (the reference implementation).
-- **Plasma** — planned port for Plasma 6: same mirroring, magnification,
-  glass tray and previews as a QML plasmoid. Spec and roadmap only so far,
-  no code yet. See [SPEC.md](SPEC.md) and [docs/plasma-port.md](docs/plasma-port.md).
+- **Plasma** — QML plasmoid for Plasma 6: same mirroring, magnification,
+  glass tray and previews. **P1 draft (pin mirroring only), not yet
+  verified on a live Plasma session** — see [SPEC.md](SPEC.md) and
+  [docs/plasma-port.md](docs/plasma-port.md).
+
+Which one do you pick? **Neither — the installer picks for you**: it
+detects your desktop (Cinnamon or KDE Plasma) and installs the matching
+frontend. If detection is ambiguous, force it with `--cinnamon` or
+`--plasma`.
 
 ## Screenshots
 
@@ -62,18 +68,42 @@ dock.*
 
 ## Install
 
+The easy way — works on both desktops, downloads what it needs:
+
 ```bash
-./install.sh                # applet files only
-./install.sh --with-panel   # also add a bottom auto-hide panel with the dock centered
+curl -fsSL https://raw.githubusercontent.com/ciberjohn/tandem-dock/main/install.sh | bash
+# to also get the dock's own bottom auto-hide bar:
+curl -fsSL https://raw.githubusercontent.com/ciberjohn/tandem-dock/main/install.sh | bash -s -- --with-panel
 ```
 
-Then, if you did not use `--with-panel`: right-click the panel → *Panel* →
-*Add panel* (bottom edge), and add Tandem Dock to its center zone via
-*Applets*. Restart Cinnamon if the applet list does not show it.
+From a clone — same thing, plus the flags:
 
-To keep the dock visually "floating", set the panel's auto-hide to
-*Auto-hide* (dock reveals when the pointer reaches the bottom edge) and give
-it a modest height (45-50px works well with 40px icons).
+```bash
+./install.sh                 # auto-detect the desktop
+./install.sh --with-panel    # also add a bottom auto-hide bar with the dock centered
+./install.sh --cinnamon      # force the Cinnamon applet
+./install.sh --plasma        # force the Plasma plasmoid
+```
+
+On Cinnamon, if you did not use `--with-panel`: right-click the panel → *Panel* →
+*Add panel* (bottom edge), and add Tandem Dock to its center zone via
+*Applets*. Restart Cinnamon if the applet list does not show it. On Plasma:
+right-click your bar → *Add Widgets...* → Tandem Dock.
+
+To keep the dock visually "floating", set the bar's auto-hide to
+*Auto-hide* / *Auto-hide panel* (the dock reveals when the pointer reaches
+the bottom edge) and give it a modest height (45-50px works well with
+40px icons).
+
+### The bottom-edge check
+
+On both desktops the installer checks whether your **regular bar sits on
+the bottom edge** — where the dock's floating bar belongs (two bars there
+would stack). If it finds one, it offers to move it to the top, left or
+right edge (your choice; pressing Enter keeps both bars). Only *regular*
+bars are offered for the move — the dock's own auto-hide bar is never
+touched. When the script is piped from curl (no prompts possible) it
+prints the instruction instead of asking.
 
 ### If you use the BlurCinnamon extension
 
