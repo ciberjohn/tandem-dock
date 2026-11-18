@@ -1,0 +1,19 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "ciberjohn"
+            }
+        ],
+        "Category": "Windows and Tasks",
+        "Description": "Centered dock that mirrors your task manager's pinned apps in real time",
+        "Icon": "preferences-desktop-icons",
+        "Id": "com.ciberjohn.tandemdock",
+        "License": "MIT",
+        "Name": "Tandem Dock",
+        "Version": "0.1.0",
+        "Website": "https://github.com/ciberjohn/tandem-dock"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}
