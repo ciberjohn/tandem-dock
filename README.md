@@ -27,6 +27,15 @@ source of truth.
 
 Built and tested on Cinnamon 6.6 (Linux Mint 22.3).
 
+## Two frontends
+
+Tandem Dock is one product with two frontends sharing a behavior spec:
+
+- **Cinnamon** — this applet, stable, v1.3.0 (the reference implementation).
+- **Plasma** — planned port for Plasma 6: same mirroring, magnification,
+  glass tray and previews as a QML plasmoid. Spec and roadmap only so far,
+  no code yet. See [SPEC.md](SPEC.md) and [docs/plasma-port.md](docs/plasma-port.md).
+
 ## Screenshots
 
 ![The Tandem Dock at rest](screenshots/dock-rest.png)
